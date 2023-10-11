@@ -1,26 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import SalaryPrediction from './SalaryPrediction';
+import SignIn from './SignIn';
 
 function App() {
   return (
-    <div className="App">
-      <SalaryPrediction />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {/* a navigation bar, search bar, preshown 10 */}
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/salary-prediction" element={<SalaryPrediction />} />
+      {/* Define other routes here */}
+    </Routes>
   );
 }
 

@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import SalaryPrediction from './SalaryPrediction';
 
 function App() {
   return (
     <div className="App">
+      <SalaryPrediction />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

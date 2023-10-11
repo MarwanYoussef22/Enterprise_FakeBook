@@ -4,8 +4,6 @@ const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
-console.log(faker);
-
 var url = "mongodb://localhost:27017";
 const client = new MongoClient(url);
 const dbName = "enterprise_fakebook";
@@ -52,7 +50,23 @@ app.get("/init", async (req, res) => {
     client.close();
 });
 
+app.get("/:requestor_id/search/:search_text", async (req, res) => {
+    const username = req.header('username');
+    console.log('username: ', username);
+});
+
+app.get("/:requestor_id/employees/:employee_id", async (req, res) => {
+    const employee_directory = await mongoConnect('employee_directory');
+
+    console.log('requestor_id: ', +req.params.requestor_id);
+    const employee = await employee_directory.findOne({ id: +req.params.employee_id });
+
+    console.log("Sending employee: ", employee);
+    res.send(employee);
+    client.close();
+});
+
 // start the rest service
-var port = 3000;
+var port = 3001;
 console.log('service opening on port: ' + port)
 app.listen(port);

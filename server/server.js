@@ -30,7 +30,7 @@ app.get("/init", async (req, res) => {
         "job_role": "Chief Executive Officer",
         "work_location": faker.location.city(),
         "salary": faker.finance.amount(65000, 200000, 0, '$'),
-        "photo_url": 'https://en.wikipedia.org/wiki/Alan_D._Schnitzer#/media/File:Alan_Schnitzer.png'
+        "photo_url": '/Alan_Schnitzer.png'
     })
 
     await security_information.insertOne({
@@ -161,6 +161,8 @@ app.get("/security/:employee_id", async (req, res) => {
     res.send(employeeSecurity);
     client.close();
 });
+
+app.use(express.static('static'));
 
 // start the rest service
 var port = 3002;

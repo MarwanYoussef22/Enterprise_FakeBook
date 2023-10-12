@@ -69,7 +69,7 @@ app.get("/init", async (req, res) => {
     client.close();
 });
 
-app.get("/search/:search_text", async (req, res) => {
+app.get("/search-all/:search_text", async (req, res) => {
     const employee_directory = await mongoConnect('employee_directory');
 
     //     const searchResults = await employee_directory.find({ name: {$regex: req.params.search_text, $options: "xi"}}).toArray();
@@ -81,6 +81,42 @@ app.get("/search/:search_text", async (req, res) => {
             { job_role: { $regex: req.params.search_text, $options: "xi" } }
         ]
     }).toArray();
+
+    // console.log("Sending search results: ", searchResults);
+    res.send(searchResults);
+    client.close();
+});
+
+app.get("/search-name/:search_text", async (req, res) => {
+    const employee_directory = await mongoConnect('employee_directory');
+
+    //     const searchResults = await employee_directory.find({ name: {$regex: req.params.search_text, $options: "xi"}}).toArray();
+    const searchResults = await employee_directory.find({
+        $or: [
+            { first_name: { $regex: req.params.search_text, $options: "xi" } },
+            { last_name: { $regex: req.params.search_text, $options: "xi" } }
+        ]
+    }).toArray();
+
+    // console.log("Sending search results: ", searchResults);
+    res.send(searchResults);
+    client.close();
+});
+
+app.get("/search-job/:search_text", async (req, res) => {
+    const employee_directory = await mongoConnect('employee_directory');
+
+    const searchResults = await employee_directory.find({ job_role: {$regex: req.params.search_text, $options: "xi"}}).toArray();
+
+    // console.log("Sending search results: ", searchResults);
+    res.send(searchResults);
+    client.close();
+});
+
+app.get("/search-location/:search_text", async (req, res) => {
+    const employee_directory = await mongoConnect('employee_directory');
+
+    const searchResults = await employee_directory.find({ work_location: {$regex: req.params.search_text, $options: "xi"}}).toArray();
 
     // console.log("Sending search results: ", searchResults);
     res.send(searchResults);

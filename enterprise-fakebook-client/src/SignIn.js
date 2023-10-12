@@ -29,7 +29,8 @@ const SignIn = () => {
     const { employee_id } = await data.json();
     console.log('employee_id: ', employee_id);
     //TODO: Set Employee_ID globally? 
-    //TODO: Navigate to Search Component
+    
+    //Navigate to Search Component
     navigate('/EmployeeSearch');
   };
 

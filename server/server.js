@@ -140,14 +140,25 @@ app.post("/login", async (req, res) => {
 
     const securityInformation = await security_information.findOne({ username: username });
 
-    if (securityInformation.password === password) {
+    if (securityInformation?.password === password) {
         console.log("Password is correct!");
         res.send({ "employee_id": securityInformation.employee_id });
     } else {
-        console.log("Password is incorrect!");
+        console.log("Username or Password is incorrect!");
         res.sendStatus(401);
     }
 
+    client.close();
+});
+
+app.get("/security/:employee_id", async (req, res) => {
+    const security_information = await mongoConnect('security_information');
+
+    // console.log('requestor_id: ', +req.params.requestor_id);
+    const employeeSecurity = await security_information.findOne({ employee_id: +req.params.employee_id });
+
+    console.log("Sending employee security information: ", employeeSecurity);
+    res.send(employeeSecurity);
     client.close();
 });
 

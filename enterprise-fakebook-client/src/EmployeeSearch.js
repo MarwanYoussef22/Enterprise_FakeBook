@@ -7,24 +7,18 @@ function EmployeeSearch() {
 
   const handleSearch = () => {
     setLoading(true);
-  
-    fetch(`/search/${searchQuery}`)
+
+    fetch(`/search/name${searchQuery}`)
       .then((response) => response.json())
       .then((data) => {
-        // Filter the data based on the search query
-        const filteredResults = data.filter((employee) => {
-          const fullName = `${employee.firstName} ${employee.lastName}`.toLowerCase();
-          return fullName.includes(searchQuery.toLowerCase());
-        });
-  
-        setSearchResults(filteredResults);
+        setSearchResults(data);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         setLoading(false);
-      });
-  };
+    });
+};
 
 return (
   <div>

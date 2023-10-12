@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate();
   // const [employeeID, setEmployeeID] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +30,7 @@ const SignIn = () => {
     console.log('employee_id: ', employee_id);
     //TODO: Set Employee_ID globally? 
     //TODO: Navigate to Search Component
+    navigate('/EmployeeSearch');
   };
 
   return (

@@ -9,12 +9,19 @@ use(database);
 
 // Create a new collection.
 // db.createCollection('employee_directory');
-// db.createCollection('employee_relations');
 // db.createCollection('security_information');
 
-// db.employee_directory.find({ $where: function() { return this.name.includes("Sch");}})
-const temp = 'sch'
-// db.employee_directory.find({ name: {$regex: /alan/i}})
-db.employee_directory.find({ name: {$regex: temp, $options: "xi"}})
-// db.employee_directory.find({ name: new RegExp(temp, 'i')})
+// db.employee_directory.drop();
+// db.security_information.drop();
 
+
+// db.employee_directory.find({ $where: function() { return this.name.includes("Sch");}})
+const temp = 'port'
+// db.employee_directory.find({ name: {$regex: temp, $options: "xi"}})
+// db.employee_directory.find({ $or: [
+// {name: {$regex: temp, $options: "xi"}},
+// {work_location: {$regex: temp, $options: "xi"}}
+// ]})
+
+
+db.employee_directory.find({ photo_url: {$regex: 'women', $options: "xi"}})

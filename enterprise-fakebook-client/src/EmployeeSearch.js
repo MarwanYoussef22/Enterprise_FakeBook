@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Employee from './Employee';
 
-function EmployeeSearch() {
+function EmployeeSearch(props) {
+  const { onSelectEmployee } = props;
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,8 @@ function EmployeeSearch() {
 
       {searchResults.length ? searchResults.map(employee => (
         <Employee
-          signedInEmployee='fake-id'
+          key={employee.id}
+          onEmployeeClick={onSelectEmployee}
           id={employee.id}
           firstName={employee.first_name}
           lastName={employee.last_name}

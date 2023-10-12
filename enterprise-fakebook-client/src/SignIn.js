@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const {onSignIn} = props;
   const navigate = useNavigate();
   // const [employeeID, setEmployeeID] = useState('');
   const [error, setError] = useState(null);
@@ -28,8 +29,8 @@ const SignIn = () => {
     setIsLoading(false);
     const { employee_id } = await data.json();
     console.log('employee_id: ', employee_id);
-    //TODO: Set Employee_ID globally? 
-
+    //Set Employee_ID
+    onSignIn(employee_id);
     //Navigate to Search Component
     navigate('/search');
   };

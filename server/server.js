@@ -39,8 +39,29 @@ app.get("/init", async (req, res) => {
         "password": faker.internet.password(),
     });
 
-    for (let i = 2; i < 100; i++) {
-        const random_manager_id = Math.ceil(Math.random() * (i - 1));
+    const firstNameHR = faker.person.firstName('female');
+    const lastNameHR = faker.person.lastName();
+
+    await employee_directory.insertOne({
+        "id": 2,
+        "first_name": firstNameHR,
+        "last_name": lastNameHR,
+        "phone_number": faker.phone.number(),
+        "job_role": "Human Resource Mangaer",
+        "work_location": faker.location.city(),
+        "salary": faker.finance.amount(65000, 200000, 0, '$'),
+        "manager_id": 1,
+        "photo_url": 'https://randomuser.me/api/portraits/women/1.jpg'
+    })
+
+    await security_information.insertOne({
+        "employee_id": 2, 
+        "username": faker.internet.userName({firstName: firstNameHR, lastName: lastNameHR}),
+        "password": faker.internet.password(),
+    });
+
+    for (let i = 3; i < 100; i++) {
+        const random_manager_id = Math.ceil(Math.random() * (i - 2));
         const random_selected_sex = (Math.random() < 0.5) ? "female" : "male"
         const firstName = faker.person.firstName(random_selected_sex);
         const lastName = faker.person.lastName();

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Employee from './Employee';
 
 function EmployeeSearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -8,7 +9,7 @@ function EmployeeSearch() {
   const handleSearch = () => {
     setLoading(true);
 
-    fetch(`/search/name${searchQuery}`)
+    fetch(`/search-name/${searchQuery}`)
       .then((response) => response.json())
       .then((data) => {
         setSearchResults(data);
@@ -34,15 +35,29 @@ return (
 
     {loading && <p>Loading...</p>}
 
-    {searchResults.length > 0 && (
+    {/* {searchResults.length > 0 && (
       <ul>
         {searchResults.map((employee) => (
           <li key={employee.id}>
-            {employee.name} - {employee.jobRole}
+            {employee.first_name}
           </li>
         ))}
       </ul>
-    )}
+    )} */}
+
+{searchResults.length ? searchResults.map(employee => (
+  <Employee 
+  signedInEmployee='fake-id'
+  id={employee.id}
+  firstName={employee.first_name}
+  lastName={employee.last_name}
+  phoneNumber={employee.phone_number}
+  job={employee.job_role}
+  location={employee.work_location}
+  managerID={employee.manager_id}
+  photoUrl={employee.photo_url}
+  />
+)) : null}
 
     {searchResults.length === 0 && !loading && <p>No results found.</p>}
   </div>

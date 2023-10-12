@@ -5,16 +5,14 @@ const Employee = (props) => {
 
     return (
         <div className='employee-card'>
-            <p>
-                signedInEmployee: {signedInEmployee}
-                id: {id}
-                firstName: {firstName}
-                lastName: {lastName}
-                phoneNumber: {phoneNumber}
-                job: {job}
-                location: {location}
-                managerID: {managerID}
-            </p>
+            <p>signedInEmployee: {signedInEmployee}</p>
+            <p>   id: {id}</p>
+            <p>   firstName: {firstName}</p>
+            <p>   lastName: {lastName}</p>
+            <p>  phoneNumber: {phoneNumber}</p>
+            <p>  job: {job}</p>
+            <p>  location: {location}</p>
+            <p>  managerID: {managerID}</p>
             <img src={photoUrl} alt="Profile" />
         </div>
     );

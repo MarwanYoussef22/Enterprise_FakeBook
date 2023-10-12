@@ -7,19 +7,24 @@ function EmployeeSearch() {
 
   const handleSearch = () => {
     setLoading(true);
-
-    // Marwan remember to replace 'endpoint' with the actual API endpoint for employee search.
+  
     fetch(`/search/${searchQuery}`)
       .then((response) => response.json())
       .then((data) => {
-        setSearchResults(data); // Assuming the API response is an array of employee objects
+        // Filter the data based on the search query
+        const filteredResults = data.filter((employee) => {
+          const fullName = `${employee.firstName} ${employee.lastName}`.toLowerCase();
+          return fullName.includes(searchQuery.toLowerCase());
+        });
+  
+        setSearchResults(filteredResults);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         setLoading(false);
-    });
-};
+      });
+  };
 
 return (
   <div>

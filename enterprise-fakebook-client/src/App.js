@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import SalaryPrediction from './SalaryPrediction';
 import SignIn from './SignIn';
-import EmployeeSearch from '..EmployeeSearch';
+import EmployeeSearch from './EmployeeSearch';
 
 function App() {
   return (

@@ -13,6 +13,8 @@ use(database);
 // db.createCollection('security_information');
 
 // db.employee_directory.find({ $where: function() { return this.name.includes("Sch");}})
-const temp = 'alan'
+const temp = 'sch'
 // db.employee_directory.find({ name: {$regex: /alan/i}})
-db.employee_directory.find({ name: new RegExp(temp, 'i')})
+db.employee_directory.find({ name: {$regex: temp, $options: "xi"}})
+// db.employee_directory.find({ name: new RegExp(temp, 'i')})
+

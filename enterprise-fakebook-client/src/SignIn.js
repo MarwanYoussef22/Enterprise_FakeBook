@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 const SignIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [employeeID, setEmployeeID] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,16 +9,25 @@ const SignIn = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
+    const data = await fetch('/login', {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        "username":  e.target.username.value,
+        "password": e.target.password.value
+      })
+    })
+    .catch((error) => {
+      console.log("Error logging in: ", error);
       setIsLoading(false);
+      setError('Invalid username or password');
+    });
 
-      if (username === 'demo' && password === 'password') {
-        // Authentication successful; redirect the user to another page.
-        // You can use React Router for navigation.
-      } else {
-        setError('Invalid username or password');
-      }
-    }, 2000);
+    setIsLoading(false);
+    const { employee_id } = await data.json();
+    console.log('employee_id: ', employee_id);
+    //TODO: Set Employee_ID globally? 
+    //TODO: Navigate to Search Component
   };
 
   return (
@@ -31,8 +39,7 @@ const SignIn = () => {
           <input
             type="text"
             id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
           />
         </div>
         <div>
@@ -40,8 +47,7 @@ const SignIn = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
           />
         </div>
         <button type="submit" disabled={isLoading}>

@@ -4,7 +4,7 @@ const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
-var url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017";
 const client = new MongoClient(url);
 const dbName = "enterprise_fakebook";
 
@@ -95,7 +95,29 @@ app.get("/:username/:password", async (req, res) => {
     client.close();
 });
 
+app.post("/login", async (req, res) => {
+    const security_information = await mongoConnect('security_information');
+    // const username = req.header('username');
+    // console.log('Headers Username: ', username);
+
+    const {username, password} = req.body;
+
+    console.log('username: ', username);
+    console.log('password: ', password);
+    const securityInformation = await security_information.findOne({ username: username });
+
+    console.log(securityInformation);
+    if(securityInformation.password === password){
+        console.log("Password is correct!");
+        res.send({"employee_id":securityInformation.employee_id});
+    }else{
+        console.log("Password is incorrect!");
+        res.sendStatus(401);
+    }
+    client.close();
+});
+
 // start the rest service
-var port = 3001;
+var port = 3002;
 console.log('service opening on port: ' + port)
 app.listen(port);

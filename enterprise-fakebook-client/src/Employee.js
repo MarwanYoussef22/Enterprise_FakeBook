@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Employee.css'
 
 const Employee = (props) => {
     const { onEmployeeClick, id, firstName, lastName, job, location, photoUrl } = props;
@@ -12,12 +13,13 @@ const Employee = (props) => {
 
     return (
         <div className='employee-card' onClick={onPress}>
-            <p>   id: {id}</p>
-            <p>   firstName: {firstName}</p>
-            <p>   lastName: {lastName}</p>
-            <p>  job: {job}</p>
-            <p>  location: {location}</p>
             <img src={photoUrl} alt="Profile" />
+            <div className='employee-information'>
+                {/* <p>   id: {id}</p> */}
+                    <p className='employee-name'>{firstName} {lastName}</p>
+                <p>  {job}</p>
+                {/* <p>  location: {location}</p> */}
+            </div>
         </div>
     );
 };

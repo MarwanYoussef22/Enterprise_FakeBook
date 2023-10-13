@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Employee from './Employee';
+import './EmployeeSearch.css';
 
 function EmployeeSearch(props) {
   const { onSelectEmployee } = props;
@@ -23,20 +24,27 @@ function EmployeeSearch(props) {
   };
 
   return (
-    <div>
+    <div className= "employee-search-container">
       <input
+        className="employee-search-input"
         type="text"
         placeholder="Search employees..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button onClick={handleSearch} disabled={loading}>
+      <button
+        className="employee-search-button"
+        onClick={handleSearch}
+        disabled={loading}
+      >
         Search
       </button>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p className="loading-message">Loading...</p>}
 
+      <ul className="search-results">
       {searchResults.length ? searchResults.map(employee => (
+        <li key={employee.id} className="search-result-item">
         <Employee
           key={employee.id}
           onEmployeeClick={onSelectEmployee}
@@ -47,9 +55,11 @@ function EmployeeSearch(props) {
           location={employee.work_location}
           photoUrl={employee.photo_url}
         />
+        </li>
       )) : null}
-
-      {searchResults.length === 0 && !loading && <p>No results found.</p>}
+      </ul>
+    
+      {searchResults.length === 0 && !loading && <p className="no-results-message">No results found.</p>}
     </div>
   );
 }

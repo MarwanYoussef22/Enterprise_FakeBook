@@ -32,3 +32,11 @@ button {
     font-weight: bolder;
     font-size: large;
 }
+
+.loading{
+    font-family: sans-serif;
+    color: #0866FF;
+    font-weight: bolder;
+    font-size: large;
+    align-self: center;
+}

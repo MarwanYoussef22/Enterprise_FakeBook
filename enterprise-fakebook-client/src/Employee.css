@@ -25,6 +25,7 @@ img {
     font-size: medium;
 }
 
-/* .employee-information{
+.employee-information{
     text-align: center;
-} */
+    padding: 20px;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Employee from './Employee';
 import './EmployeeSearch.css';
 
@@ -8,10 +8,14 @@ function EmployeeSearch(props) {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    setLoading(true);
+useEffect(() => {
+  fetchData('g');
+}, [])
 
-    fetch(`/search-name/${searchQuery}`)
+const fetchData = async (searchText) => {
+  setLoading(true);
+
+    await fetch(`/search-name/${searchText}`)
       .then((response) => response.json())
       .then((data) => {
         setSearchResults(data);
@@ -21,6 +25,10 @@ function EmployeeSearch(props) {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
+}
+
+  const handleSearch = async () => {
+    fetchData(searchQuery);
   };
 
   return (

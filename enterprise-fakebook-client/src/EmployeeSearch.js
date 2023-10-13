@@ -43,10 +43,8 @@ function EmployeeSearch(props) {
           id={employee.id}
           firstName={employee.first_name}
           lastName={employee.last_name}
-          phoneNumber={employee.phone_number}
           job={employee.job_role}
           location={employee.work_location}
-          managerID={employee.manager_id}
           photoUrl={employee.photo_url}
         />
       )) : null}

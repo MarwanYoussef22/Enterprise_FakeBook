@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Employee = (props) => {
-    const { onEmployeeClick, id, firstName, lastName, phoneNumber, job, location, managerID, photoUrl } = props;
+    const { onEmployeeClick, id, firstName, lastName, job, location, photoUrl } = props;
     const navigate = useNavigate();
 
     const onPress = () => {
@@ -15,10 +15,8 @@ const Employee = (props) => {
             <p>   id: {id}</p>
             <p>   firstName: {firstName}</p>
             <p>   lastName: {lastName}</p>
-            <p>  phoneNumber: {phoneNumber}</p>
             <p>  job: {job}</p>
             <p>  location: {location}</p>
-            <p>  managerID: {managerID}</p>
             <img src={photoUrl} alt="Profile" />
         </div>
     );

@@ -47,7 +47,7 @@ app.get("/init", async (req, res) => {
         "first_name": firstNameHR,
         "last_name": lastNameHR,
         "phone_number": faker.phone.number(),
-        "job_role": "Human Resource Mangaer",
+        "job_role": "Human Resource Manager",
         "work_location": faker.location.city(),
         "salary": faker.finance.amount(65000, 200000, 0, '$'),
         "manager_id": 1,

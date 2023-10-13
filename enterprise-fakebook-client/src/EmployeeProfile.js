@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './EmployeeProfile.css'
 // import Employee from './Employee';
 
 const EmployeeProfile = (props) => {
@@ -12,28 +13,34 @@ const EmployeeProfile = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = async () => {
-        if(choosenEmployee && signedInEmployee){
-            await fetch(`/employees/${choosenEmployee}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setEmployeeData(data);
-            })
-            .catch((error) => {
-                console.log(`Error getting employee data for employee id.: ${choosenEmployee}`, error);
-                setIsLoading(false);
-                setError('Cannot get employee data.');
-            });
+        if (choosenEmployee && signedInEmployee) {
+            await fetch(`/employees/${choosenEmployee}`, 
+            {
+                method: 'post',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({
+                  "signedInEmployee": signedInEmployee
+                })
+            }).then((response) => response.json())
+                .then((data) => {
+                    setEmployeeData(data.employee);
+                })
+                .catch((error) => {
+                    console.log(`Error getting employee data for employee id.: ${choosenEmployee}`, error);
+                    setIsLoading(false);
+                    setError('Cannot get employee data.');
+                });
 
-            await fetch(`/employees/${signedInEmployee}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setSignedInEmployeeData(data);
-            })
-            .catch((error) => {
-                console.log(`Error getting employee data for employee id.: ${signedInEmployee}`, error);
-                setIsLoading(false);
-                setError('Cannot get employee data.');
-            });
+            // await fetch(`/employees/${signedInEmployee}`)
+            //     .then((response) => response.json())
+            //     .then((data) => {
+            //         setSignedInEmployeeData(data);
+            //     })
+            //     .catch((error) => {
+            //         console.log(`Error getting employee data for employee id.: ${signedInEmployee}`, error);
+            //         setIsLoading(false);
+            //         setError('Cannot get employee data.');
+            //     });
         }
 
         // if (employeeData?.manager_id) {
@@ -59,23 +66,26 @@ const EmployeeProfile = (props) => {
     }, [])
 
     return (
-    <div>
-        <Link to ="/search">
-            <button>Back</button>
-        </Link>
-        <img src={employeeData?.photo_url} alt="Profile" />
-        <p>   firstName: {employeeData?.first_name}</p>
-        <p>   lastName: {employeeData?.last_name}</p>
-        <p>  phoneNumber: {employeeData?.phone_number}</p>
-        <p>  job: {employeeData?.job_role}</p>
-        <p>  location: {employeeData?.work_location}</p>
-        {signedInEmployeeData?.job === 'Human Resource Manager' || (employeeData?.manager && signedInEmployeeData?.id === employeeData?.manager) ? (
-            <p>  Salary: {employeeData?.salary}</p>
-        ) : null}
-        {employeeData?.manager_id ? (
-            <p>  manager ID: {employeeData?.manager_id}</p>
-        ) : null}
-        {/* {employeeData?.manager_id && managerData ? (<div>
+        <div className='profile-container'>
+            <Link to="/search">
+                <button>Back</button>
+            </Link>
+            <div className='profile-card'>
+                <img src={employeeData?.photo_url} alt="Profile" />
+                <div className='profile-info'>
+                    <p className='profile-name'>{employeeData?.first_name} {employeeData?.last_name}</p>
+                    <p>{employeeData?.job_role}</p>
+                    <p>{employeeData?.phone_number}</p>
+                    <p>  location: {employeeData?.work_location}</p>
+                    {signedInEmployeeData?.job === 'Human Resource Manager' || (employeeData?.manager && signedInEmployeeData?.id === employeeData?.manager) ? (
+                        <p>  Salary: {employeeData?.salary}</p>
+                    ) : null}
+                    {employeeData?.manager_id ? (
+                        <p>  manager ID: {employeeData?.manager_id}</p>
+                    ) : null}
+                </div>
+                
+                {/* {employeeData?.manager_id && managerData ? (<div>
             <p> Manager: </p>
             <Employee
                 key={managerData?.id}
@@ -89,8 +99,8 @@ const EmployeeProfile = (props) => {
                 photoUrl={managerData?.photo_url}
             />
         </div>) : null} */}
-
-    </div>);
+            </div>
+        </div>);
 }
 
 export default EmployeeProfile;

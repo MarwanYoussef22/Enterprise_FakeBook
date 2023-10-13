@@ -144,14 +144,20 @@ app.get("/search-location/:search_text", async (req, res) => {
     client.close();
 });
 
-app.get("/employees/:employee_id", async (req, res) => {
+app.post("/employees/:employee_id", async (req, res) => {
     const employee_directory = await mongoConnect('employee_directory');
+    const { signedInEmployee } = req.body;
 
-    // console.log('requestor_id: ', +req.params.requestor_id);
+    console.log('requestorId: ', signedInEmployee);
     const employee = await employee_directory.findOne({ id: +req.params.employee_id });
-
+    const requestor = await employee_directory.findOne({ id: +signedInEmployee });
+    const manager = await employee_directory.findOne({ id: +employee.manager_id });
     console.log("Sending employee: ", employee);
-    res.send(employee);
+    res.send({
+        "employee": employee,
+        "requestor": requestor,
+        "manager": manager
+    });
     client.close();
 });
 
@@ -175,7 +181,6 @@ app.post("/login", async (req, res) => {
 app.get("/security/:employee_id", async (req, res) => {
     const security_information = await mongoConnect('security_information');
 
-    // console.log('requestor_id: ', +req.params.requestor_id);
     const employeeSecurity = await security_information.findOne({ employee_id: +req.params.employee_id });
 
     console.log("Sending employee security information: ", employeeSecurity);

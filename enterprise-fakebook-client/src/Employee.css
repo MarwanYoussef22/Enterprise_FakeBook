@@ -1,27 +1,28 @@
-.employee-card{
+.employee-card {
     /* background-color: #a7c7fc; */
-    border-radius: 30px;
+    /* border-radius: 30px; */
     flex-direction: row;
     display: flex;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1)
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    justify-content: space-between;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1) */
 }
 
-img{
+img {
     width: 128px;
     height: 128px;
     align-self: center;
     border-radius: 20px;
 }
 
-.employee-name{
+.employee-name {
     font-family: sans-serif;
-  color: #0866FF;
-  font-weight: bolder;
-  text-align: center;
-  font-size: medium;
+    color: #0866FF;
+    font-weight: bolder;
+    text-align: center;
+    font-size: medium;
 }
 
 /* .employee-information{

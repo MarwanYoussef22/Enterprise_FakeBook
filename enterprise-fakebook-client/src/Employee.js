@@ -17,7 +17,7 @@ const Employee = (props) => {
             <div className='employee-information'>
                 {/* <p>   id: {id}</p> */}
                     <p className='employee-name'>{firstName} {lastName}</p>
-                <p>  {job}</p>
+                <p>{job}</p>
                 {/* <p>  location: {location}</p> */}
             </div>
         </div>

@@ -28,8 +28,8 @@ app.get("/init", async (req, res) => {
         "last_name": 'Schnitzer',
         "phone_number": faker.phone.number(),
         "job_role": "Chief Executive Officer",
-        "work_location": faker.location.city(),
-        "salary": faker.finance.amount(65000, 200000, 0, '$'),
+        "work_location": `${faker.location.city()}, ${faker.location.state({abbreviated: true})}`,
+        "salary": '$1300000',
         "photo_url": '/Alan_Schnitzer.png'
     })
 
@@ -48,7 +48,7 @@ app.get("/init", async (req, res) => {
         "last_name": lastNameHR,
         "phone_number": faker.phone.number(),
         "job_role": "Human Resource Manager",
-        "work_location": faker.location.city(),
+        "work_location": `${faker.location.city()}, ${faker.location.state({abbreviated: true})}`,
         "salary": faker.finance.amount(65000, 200000, 0, '$'),
         "manager_id": 1,
         "photo_url": 'https://randomuser.me/api/portraits/women/1.jpg'
@@ -72,7 +72,7 @@ app.get("/init", async (req, res) => {
             "last_name": lastName,
             "phone_number": faker.phone.number(),
             "job_role": faker.person.jobTitle(),
-            "work_location": faker.location.city(),
+            "work_location": `${faker.location.city()}, ${faker.location.state({abbreviated: true})}`,
             "salary": faker.finance.amount(65000, 200000, 0, '$'),
             "manager_id": random_manager_id,
             "photo_url": `https://randomuser.me/api/portraits/${random_selected_sex === 'male' ? 'men' : 'women'}/${i}.jpg`

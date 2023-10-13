@@ -8,14 +8,32 @@
 
 .sign-in-card {
   border-radius: 30px;
-  width: 60%;
-  padding: 10px;
+  width: 400px;
+  padding: 20px;
   margin: auto;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1)
 }
 
 .submit-button{
-  color: #0866FF;
+  /* color: #0866FF; */
   margin-top: 10px;
+  width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0866FF;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input{
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }

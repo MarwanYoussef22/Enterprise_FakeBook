@@ -1,0 +1,21 @@
+.title {
+  font-family: sans-serif;
+  color: #0866FF;
+  font-weight: bolder;
+  text-align: center;
+  font-size: x-large;
+}
+
+.sign-in-card {
+  border-radius: 30px;
+  width: 60%;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1)
+}
+
+.submit-button{
+  color: #0866FF;
+  margin-top: 10px;
+}

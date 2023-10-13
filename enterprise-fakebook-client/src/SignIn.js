@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './SignIn.css'
 
 const SignIn = (props) => {
   const {onSignIn} = props;
   const navigate = useNavigate();
-  // const [employeeID, setEmployeeID] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,29 +37,34 @@ const SignIn = (props) => {
 
   return (
     <div>
-      <h2>Sign In</h2>
+      <p className='title'>Enterprise Fakebook</p>
+    <div className='sign-in-card'>
       <form onSubmit={handleSignIn}>
         <div>
-          <label htmlFor="username">Username:</label>
+          {/* <label htmlFor="username">Username:</label> */}
           <input
             type="text"
             id="username"
             name="username"
+            placeholder='username'
+            autoFocus='1'
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          {/* <label htmlFor="password">Password:</label> */}
           <input
             type="password"
             id="password"
             name="password"
+            placeholder='password'
           />
         </div>
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className='submit-button'>
           Sign In
         </button>
       </form>
       {error && <p className="error-message">{error}</p>}
+    </div>
     </div>
   );
 };

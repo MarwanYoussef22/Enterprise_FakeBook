@@ -16,7 +16,6 @@ useEffect(() => {
 
   return (
     <Routes>
-      {/* a navigation bar, search bar, preshown 10 */}
       <Route path="/" element={<SignIn onSignIn={setIdLoggedIn}/>} />
       <Route path="/salary-prediction" element={<SalaryPrediction />} />
       <Route path="/search" element={<EmployeeSearch onSelectEmployee={setSelectedEmployee}/>} />

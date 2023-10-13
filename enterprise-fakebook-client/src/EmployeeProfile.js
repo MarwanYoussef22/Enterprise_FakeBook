@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 // import Employee from './Employee';
 
 const EmployeeProfile = (props) => {
@@ -57,7 +58,11 @@ const EmployeeProfile = (props) => {
         fetchData();
     }, [])
 
-    return (<div>
+    return (
+    <div>
+        <Link to ="/search">
+            <button>Back</button>
+        </Link>
         <img src={employeeData?.photo_url} alt="Profile" />
         <p>   firstName: {employeeData?.first_name}</p>
         <p>   lastName: {employeeData?.last_name}</p>
@@ -84,7 +89,7 @@ const EmployeeProfile = (props) => {
                 photoUrl={managerData?.photo_url}
             />
         </div>) : null} */}
-        {/* TODO: back button for navigation */}
+
     </div>);
 }
 
